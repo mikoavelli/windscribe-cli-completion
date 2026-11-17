@@ -113,19 +113,25 @@ _windscribe_cli() {
         positional+=("$word")
     done
 
-    # Flag completion, valid wherever the command accepts them.
+    # Flag completion, wherever the command accepts them. Every command
+    # supports -h/--help; connect and disconnect also take -n; the top level
+    # exposes -h/--help/--version globally.
     if [[ $cur == -* ]]; then
-        local flags=(--help)
-        case "${positional[0]:-}" in
-            connect|disconnect) flags+=(-n) ;;
-        esac
+        local flags=(-h --help)
+        if ((${#positional[@]} == 0)); then
+            flags+=(--version)
+        else
+            case "${positional[0]}" in
+                connect|disconnect) flags+=(-n) ;;
+            esac
+        fi
         _windscribe_cli_compgen "$cur" "${flags[@]}"
         return
     fi
 
     # No command yet: complete the command itself.
     if ((${#positional[@]} == 0)); then
-        _windscribe_cli_compgen "$cur" "${_windscribe_cli_commands[@]}" --help
+        _windscribe_cli_compgen "$cur" "${_windscribe_cli_commands[@]}"
         return
     fi
 
@@ -142,11 +148,15 @@ _windscribe_cli() {
         connect)
             # windscribe-cli connect [-n] [best|<location>|static <city|ip>] [protocol[:port]]
             if ((ncompleted == 0)); then
-                local candidates=(best static)
-                while IFS= read -r word; do
-                    [[ -n $word ]] && candidates+=("$word")
-                done < <(_windscribe_cli_location_list)
-                _windscribe_cli_compgen "$cur" "${candidates[@]}"
+                if [[ $cur == *:* ]]; then
+                    _windscribe_cli_protocol_candidates "$cur"
+                else
+                    local candidates=(best static "${_windscribe_cli_protocols[@]}")
+                    while IFS= read -r word; do
+                        [[ -n $word ]] && candidates+=("$word")
+                    done < <(_windscribe_cli_location_list)
+                    _windscribe_cli_compgen "$cur" "${candidates[@]}"
+                fi
             elif ((ncompleted == 1)); then
                 if [[ ${positional[1]} == static ]]; then
                     local candidates=()

@@ -92,7 +92,7 @@ assert_completion() {
 
 # --- Tests -------------------------------------------------------------------
 assert_completion 'no arguments completes all commands' \
-    $'connect\ndisconnect\nstatus\nfirewall\nlocations\nports\namneziawg\nip\nlogin\nlogout\nupdate\nlogs\nkeylimit\nignoresslerrors\nversion\nhelp\n--help' \
+    $'connect\ndisconnect\nstatus\nfirewall\nlocations\nports\namneziawg\nip\nlogin\nlogout\nupdate\nlogs\nkeylimit\nignoresslerrors\nversion\nhelp' \
     windscribe-cli ""
 
 assert_completion 'command prefix completes to nearest match' \
@@ -144,7 +144,7 @@ assert_completion 'help takes a command' \
     windscribe-cli help ""
 
 assert_completion 'connect offers best/static and locations' \
-    $'Best Location\nDenver\nEU\nEiffel\nMagic City\nMile High\nParis\nUS Central\nWurstchen\nbest\nstatic\nAtlanta' \
+    $'Best Location\nDenver\nEU\nEiffel\nMagic City\nMile High\nParis\nUS Central\nWurstchen\nbest\nstatic\nAtlanta\nwireguard\nudp\ntcp\nstealth\nwstunnel' \
     windscribe-cli connect ""
 
 assert_completion 'connect completes single-word location prefix' \
@@ -175,13 +175,33 @@ assert_completion 'connect protocol:port completes ports for protocol' \
     $'wireguard:123\nwireguard:443\nwireguard:53\nwireguard:80' \
     windscribe-cli connect best wireguard:
 
-assert_completion 'connect flags: -n and --help' \
-    $'--help\n-n' \
+assert_completion 'connect flags: -h, --help and -n' \
+    $'-h\n--help\n-n' \
     windscribe-cli connect -
 
-assert_completion 'disconnect flags: -n and --help' \
-    $'--help\n-n' \
+assert_completion 'disconnect flags: -h, --help and -n' \
+    $'-h\n--help\n-n' \
     windscribe-cli disconnect -
+
+assert_completion 'other commands also accept -h and --help' \
+    $'-h\n--help' \
+    windscribe-cli status -
+
+assert_completion 'top-level flags: -h, --help, --version' \
+    $'-h\n--help\n--version' \
+    windscribe-cli -
+
+assert_completion 'connect takes a bare protocol as first argument' \
+    'wireguard' \
+    windscribe-cli connect wir
+
+assert_completion 'connect protocol:port as first argument' \
+    $'stealth:443\nstealth:8443' \
+    windscribe-cli connect stealth:
+
+assert_completion 'connect takes protocol as first argument without location' \
+    $'wireguard\nwstunnel' \
+    windscribe-cli connect "w"
 
 assert_completion 'ip takes rotate|fav|unfav' \
     $'fav\nrotate\nunfav' \

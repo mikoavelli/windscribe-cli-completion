@@ -39,8 +39,9 @@ supported, mirroring the installer).
 
 | Input | Completions |
 | --- | --- |
-| `windscribe-cli <TAB>` | all 16 commands plus `--help` |
-| `connect <TAB>` | `best`, `static`, and live locations from `windscribe-cli locations` (regions, cities, nicknames; multi-word nicknames are quoted on insert) |
+| `windscribe-cli <TAB>` | all 16 commands |
+| `windscribe-cli -<TAB>` | `-h`, `--help`, `--version` |
+| `connect <TAB>` | `best`, `static`, the protocols, and live locations from `windscribe-cli locations` (regions, cities, nicknames; multi-word nicknames are quoted on insert) |
 | `connect static <TAB>` | static-IP cities and IPs from `windscribe-cli locations static` |
 | `connect … <TAB>` | `wireguard`, `udp`, `tcp`, `stealth`, `wstunnel` |
 | `connect … wireguard:<TAB>` | the ports `windscribe-cli ports wireguard` reports |
@@ -51,7 +52,7 @@ supported, mirroring the installer).
 | `keylimit` | `keep`, `delete` |
 | `logs` | `send` |
 | `help <TAB>` | the command list |
-| everywhere | `-n`/`--help` where the command supports them |
+| everywhere | `-h`/`--help` everywhere; `-n` on `connect`/`disconnect` |
 
 Completion queries to the CLI are cached by the shell session only as long as
 bash lives; nothing is persisted.

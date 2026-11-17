@@ -7,6 +7,10 @@ on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Global top-level flags `-h`, `--help`, `--version`.
+- `connect` accepts a bare protocol as its first argument
+  (`connect wireguard`), including `protocol:port` expansion.
+- Every command accepts `-h`/`--help`; `connect` and `disconnect` also `-n`.
 - Bash tab completion for `windscribe-cli`: all commands, subcommands,
   on/off and keep/delete arguments, `-n`/`--help` flags, protocols and
   `protocol:port` expansion from `windscribe-cli ports`.
