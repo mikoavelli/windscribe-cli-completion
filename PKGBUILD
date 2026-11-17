@@ -9,6 +9,7 @@ url="https://github.com/mikoavelli/windscribe-completion"
 license=('MIT')
 depends=('bash-completion')
 optdepends=('windscribe-cli: the client this completes')
+options=('!strip' '!debug')
 source=("windscribe-cli.bash"
         "LICENSE")
 sha256sums=('ac8d69e06145341faa2769b777b11be9f389c441915fd0c1a5eda9cc5ade1425'
