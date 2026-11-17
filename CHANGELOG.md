@@ -15,6 +15,8 @@ on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   pinned favourite IPs (`locations fav`). Multi-word locations are quoted
   by readline on insertion.
 - Test suite (`test/run-tests.bash`) driven by a stubbed `windscribe-cli`.
+- `install.sh` / `uninstall.sh`: per-user (default) or system-wide install
+  into bash-completion's directories; `--destdir` for packaging.
 
 ## [0.0.0]
 
