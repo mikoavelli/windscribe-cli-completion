@@ -13,14 +13,20 @@ For the current user (no sudo):
 ./install.sh
 ```
 
-System-wide (uses sudo if you are not root):
+That copies the completion to `~/.local/share/bash-completion/completions/windscribe-cli`,
+the same place packaged completions live for the user's shell. That's it —
+no sourcing, no `.bashrc` edits. bash-completion loads it automatically on
+first TAB in every new interactive shell, exactly like the completions in
+`/usr/share/bash-completion/completions`.
+
+System-wide, for all users (uses sudo if you are not root) — installs into
+`/usr/share/bash-completion/completions`, alongside the other completions:
 
 ```sh
 sudo ./install.sh --system
 ```
 
-Open a new shell, or `source ~/.local/share/bash-completion/completions/windscribe-cli`,
-and try:
+Then just try:
 
 ```sh
 windscribe-cli <TAB>

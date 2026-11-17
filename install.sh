@@ -67,6 +67,6 @@ bash -n "$dest/$NAME"
 cat <<EOF
 Installed $dest/$NAME
 
-Open a new shell or run:  source $dest/$NAME
-Then try:                 windscribe-cli <TAB>
+That's all. Open a new shell and press TAB — bash-completion loads it
+automatically on first use, exactly like packaged completions.
 EOF
