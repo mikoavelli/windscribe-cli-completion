@@ -5,9 +5,6 @@ client, `windscribe-cli`. After installation the whole command surface —
 commands, subcommands, flags, protocols, and even live locations — completes
 on `TAB`, the way other packages' completions do.
 
-Scope note: this completes the CLI only. The GUI app has no command surface
-to complete.
-
 ## Install
 
 Build and install the pacman package like any other:
