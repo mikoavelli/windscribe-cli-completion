@@ -17,6 +17,7 @@ on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Test suite (`test/run-tests.bash`) driven by a stubbed `windscribe-cli`.
 - `install.sh` / `uninstall.sh`: per-user (default) or system-wide install
   into bash-completion's directories; `--destdir` for packaging.
+- README: install/usage/development sections and a progress roadmap.
 
 ## [0.0.0]
 
