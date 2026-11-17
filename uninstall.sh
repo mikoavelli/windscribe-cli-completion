@@ -34,15 +34,8 @@ if [[ -n $destdir ]]; then
     target="$destdir/$NAME"
 else
     case "$mode" in
-        user)   target="$HOME/.local/share/bash-completion/completions/$NAME" ;;
-        system) target="/usr/share/bash-completion/completions/$NAME" ;;
-        auto)
-            if ((EUID == 0)); then
-                target="/usr/share/bash-completion/completions/$NAME"
-            else
-                target="$HOME/.local/share/bash-completion/completions/$NAME"
-            fi
-            ;;
+        auto|system) target="/usr/share/bash-completion/completions/$NAME" ;;
+        user)        target="$HOME/.local/share/bash-completion/completions/$NAME" ;;
     esac
 fi
 

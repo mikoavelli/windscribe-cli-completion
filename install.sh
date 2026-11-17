@@ -1,15 +1,15 @@
 #!/bin/bash
-# Install the windscribe-cli bash completion.
-#
-# Without arguments the completion is installed for the current user into
-# ~/.local/share/bash-completion/completions (bash-completion picks it up
-# automatically in new interactive shells, no /etc changes needed).
+# Install the windscribe-cli bash completion, the same way packaged
+# completions are installed: into the system bash-completion directory
+# /usr/share/bash-completion/completions/windscribe-cli (uses sudo if not
+# root). A new shell picks it up automatically — no sourcing, ever.
 #
 # Options:
-#   --user     install for the current user (default when not root)
-#   --system   install for all users into /usr/share/bash-completion/completions
-#              (uses sudo if not run as root)
-#   --destdir  install into an explicit directory instead
+#   --system   install into /usr/share/bash-completion/completions
+#              (default; uses sudo if not root)
+#   --user     install for the current user into
+#              ~/.local/share/bash-completion/completions instead
+#   --destdir  install into an explicit directory instead (no sudo)
 #   -h|--help  show this help
 
 set -euo pipefail
@@ -42,15 +42,8 @@ if [[ -n $destdir ]]; then
     dest="$destdir"
 else
     case "$mode" in
-        user)   dest="$HOME/.local/share/bash-completion/completions" ;;
-        system) dest="/usr/share/bash-completion/completions" ;;
-        auto)
-            if ((EUID == 0)); then
-                dest="/usr/share/bash-completion/completions"
-            else
-                dest="$HOME/.local/share/bash-completion/completions"
-            fi
-            ;;
+        auto|system) dest="/usr/share/bash-completion/completions" ;;
+        user)        dest="$HOME/.local/share/bash-completion/completions" ;;
     esac
 fi
 

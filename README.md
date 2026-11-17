@@ -7,24 +7,19 @@ on `TAB`, the way other packages' completions do.
 
 ## Install
 
-For the current user (no sudo):
+For all users, exactly like the packaged completions in
+`/usr/share/bash-completion/completions` (uses sudo if you are not root):
 
 ```sh
-./install.sh
+sudo ./install.sh
 ```
 
-That copies the completion to `~/.local/share/bash-completion/completions/windscribe-cli`,
-the same place packaged completions live for the user's shell. That's it —
-no sourcing, no `.bashrc` edits. bash-completion loads it automatically on
-first TAB in every new interactive shell, exactly like the completions in
-`/usr/share/bash-completion/completions`.
+Open a new shell and press TAB. bash-completion loads it automatically on
+first use — no sourcing, no `.bashrc` edits.
 
-System-wide, for all users (uses sudo if you are not root) — installs into
-`/usr/share/bash-completion/completions`, alongside the other completions:
-
-```sh
-sudo ./install.sh --system
-```
+Prefer not to touch the system tree? `--user` installs into
+`~/.local/share/bash-completion/completions/windscribe-cli` instead
+(`./install.sh --user`, no sudo).
 
 Then just try:
 
