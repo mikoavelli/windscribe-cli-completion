@@ -7,19 +7,17 @@ on `TAB`, the way other packages' completions do.
 
 ## Install
 
-For all users, exactly like the packaged completions in
-`/usr/share/bash-completion/completions` (uses sudo if you are not root):
+Build and install the pacman package like any other:
 
 ```sh
-sudo ./install.sh
+makepkg -si
 ```
 
-Open a new shell and press TAB. bash-completion loads it automatically on
-first use — no sourcing, no `.bashrc` edits.
-
-Prefer not to touch the system tree? `--user` installs into
-`~/.local/share/bash-completion/completions/windscribe-cli` instead
-(`./install.sh --user`, no sudo).
+This installs `/usr/share/bash-completion/completions/windscribe-cli` — the
+same path every other completion on the system comes from. Open a new shell
+and press TAB: bash-completion loads it automatically on first use. No
+sourcing, no `.bashrc` edits. Remove with
+`sudo pacman -R windscribe-cli-bash-completion`.
 
 Then just try:
 
@@ -31,9 +29,6 @@ windscribe-cli connect best wireguard:<TAB>
 windscribe-cli ports <TAB>
 windscribe-cli help <TAB>
 ```
-
-Remove it with `./uninstall.sh` (`--system` / `--destdir DIR` variants
-supported, mirroring the installer).
 
 ## What completes
 
@@ -75,6 +70,9 @@ The test suite stubs `windscribe-cli` on `PATH` (it asserts the stub is the
 binary on `PATH` and refuses to run otherwise), so tests never touch the
 real daemon.
 
+Rebuild the package with `makepkg -f`; after editing `windscribe-cli.bash`,
+refresh its checksum with `updpkgsums`.
+
 ## Progress
 
 Tracked like the rest of the project: `CHANGELOG.md` for released behaviour,
@@ -84,8 +82,9 @@ conventional-commit git history for the audit trail.
 - [x] Bash completion for the full `windscribe-cli` command surface
 - [x] Live location / static IP / pinned-IP candidates
 - [x] Test suite with stubbed CLI (27 tests)
-- [x] `install.sh` / `uninstall.sh`
-- [ ] Release `v0.1.0`
+- [x] Arch package (`PKGBUILD`, installs into
+      `/usr/share/bash-completion/completions` like packaged completions)
+- [x] Release `v0.1.0`
 - [ ] Fish completion (maybe, if there is demand)
 - [ ] Zsh completion (out of scope for now — bash was requested)
 

@@ -3,3 +3,8 @@
 *.bak
 .DS_Store
 test/stub-bin/
+*.pkg.tar.zst
+*.pkg.tar.xz
+src/
+pkg/
+.SRCINFO.sig

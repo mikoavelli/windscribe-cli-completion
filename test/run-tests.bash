@@ -54,7 +54,7 @@ command -v windscribe-cli >/dev/null || { echo "stub not on PATH" >&2; exit 2; }
 
 # Load bash-completion (idempotent) then the completion under test.
 [[ -r /usr/share/bash-completion/bash_completion ]] && source /usr/share/bash-completion/bash_completion
-source "$PROJECT_ROOT/completions/windscribe-cli.bash"
+source "$PROJECT_ROOT/windscribe-cli.bash"
 
 # --- Test machinery ----------------------------------------------------------
 passes=0
